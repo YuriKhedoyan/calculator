@@ -1,0 +1,15 @@
+body {
+  background-color: black
+}
+
+.result {
+  margin-top: 171px;
+  margin-bottom: 25px;
+  margin-right: 20px;
+  text-align: right;
+  color: white;
+}
+
+.result p {
+  font-size: 50px;
+}
