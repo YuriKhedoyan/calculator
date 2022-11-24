@@ -1,5 +1,5 @@
 import Calculator from "./components/pages/Calculator";
 
-const App = () =>  <Calculator></Calculator>
+const App = () =>  <><Calculator/></>
 
 export default App;
