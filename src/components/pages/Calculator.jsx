@@ -13,18 +13,21 @@ const Calculator = () => {
   const submit = e => {
     if (operation === '+') {
       setResult(firstNum + secondNum)
+      setFirstNum(firstNum + secondNum);
     } else if (operation === '-') {
       setResult(firstNum - secondNum)
+      setFirstNum(firstNum - secondNum);
     } else if (operation === '/') {
       setResult(firstNum / secondNum)
+      setFirstNum(firstNum / secondNum);
     } else if (operation === '%') {
       setResult(firstNum * secondNum / 100)
+      setFirstNum(firstNum * secondNum / 100);
     } else {
       setResult(firstNum * secondNum)
+      setFirstNum(firstNum * secondNum);
     }
-    // 1. 
-    setFirstNum(result);
-    //why doesn't it work ?   1.
+    console.log(result)
     setSecondNum(0);
     setOperation('');
   }
@@ -41,7 +44,7 @@ const Calculator = () => {
   return (
     <>
       <div className="result">
-        <p><b>{result !== 0 ? result : !operation ? firstNum : secondNum}</b></p>
+        <p><b>{result ? result : secondNum !== 0 ? secondNum : firstNum}</b></p>
         <p>
         </p>
       </div>
