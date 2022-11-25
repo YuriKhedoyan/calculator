@@ -2,8 +2,6 @@ import React from "react";
 import { useState } from "react";
 import NumberButtons from '../common/NumberButtons'
 import '../../Assets/style.sass'
-
-
 const Calculator = () => {
   const [result, setResult] = useState(0);
   const [operation, setOperation] = useState('');
@@ -11,23 +9,32 @@ const Calculator = () => {
   const [secondNum, setSecondNum] = useState(0);
 
   const submit = e => {
-    if (operation === '+') {
-      setResult(firstNum + secondNum)
-      setFirstNum(firstNum + secondNum);
-    } else if (operation === '-') {
-      setResult(firstNum - secondNum)
-      setFirstNum(firstNum - secondNum);
-    } else if (operation === '/') {
-      setResult(firstNum / secondNum)
-      setFirstNum(firstNum / secondNum);
-    } else if (operation === '%') {
-      setResult(firstNum * secondNum / 100)
-      setFirstNum(firstNum * secondNum / 100);
-    } else {
-      setResult(firstNum * secondNum)
-      setFirstNum(firstNum * secondNum);
+    switch (operation) {
+      case '+':
+        setResult(firstNum + secondNum)
+        setFirstNum(firstNum + secondNum);
+      break
+
+      case '-':
+        setResult(firstNum - secondNum)
+        setFirstNum(firstNum - secondNum);
+      break
+
+      case '*':
+        setResult(firstNum * secondNum)
+        setFirstNum(firstNum * secondNum);
+      break
+
+      case '/':
+        setResult(firstNum / secondNum)
+        setFirstNum(firstNum / secondNum);
+      break
+
+      case '%':
+        setResult(firstNum * secondNum / 100)
+        setFirstNum(firstNum * secondNum / 100);
+      break
     }
-    console.log(result)
     setSecondNum(0);
     setOperation('');
   }
@@ -40,6 +47,8 @@ const Calculator = () => {
   }
 
   const checkNumber = num => !operation ? setFirstNum(-Math.abs(num)) : setSecondNum(-Math.abs(num))
+  const addNumber = el => operation ? setSecondNum(Number(String(secondNum) + el)) : setFirstNum(Number(String(firstNum) + el))
+  const addDot = () => operation ? setSecondNum(String(secondNum) + '.') : setFirstNum(String(firstNum) + '.');
 
   return (
     <>
@@ -58,26 +67,26 @@ const Calculator = () => {
       </div>
       <div>
         <span>
-          {[7, 8, 9].map(el => <NumberButtons title={el} onClick={e => operation ? setSecondNum(Number(String(secondNum) + el)) : setFirstNum(Number(String(firstNum) + el))} elementId={'blackButton'}></NumberButtons>)}
+          {[7, 8, 9].map(el => <NumberButtons title={el} onClick={e => addNumber(el)} elementId={'blackButton'}></NumberButtons>)}
           <NumberButtons title={'X'} onClick={e => setOperation('X')} elementId={'orangeButton'}></NumberButtons>
         </span>
       </div>
       <div>
         <span>
-          {[4, 5, 6].map(el => <NumberButtons title={el} onClick={e => operation ? setSecondNum(Number(String(secondNum) + el)) : setFirstNum(Number(String(firstNum) + el))} elementId={'blackButton'}></NumberButtons>)}
+          {[4, 5, 6].map(el => <NumberButtons title={el} onClick={e => addNumber(el)} elementId={'blackButton'}></NumberButtons>)}
           <NumberButtons title={'-'} onClick={e => setOperation('-')} elementId={'orangeButton'}></NumberButtons>
         </span>
       </div>
       <div>
         <span>
-          {[1, 2, 3].map(el => <NumberButtons title={el} onClick={e => operation ? setSecondNum(Number(String(secondNum) + el)) : setFirstNum(Number(String(firstNum) + el))} elementId={'blackButton'}></NumberButtons>)}
+          {[1, 2, 3].map(el => <NumberButtons title={el} onClick={e => addNumber(el)} elementId={'blackButton'}></NumberButtons>)}
           <NumberButtons title={'+'} onClick={e => setOperation('+')} elementId={'orangeButton'}></NumberButtons>
         </span>
       </div>
       <div>
         <span>
-          <NumberButtons title={'0'} onClick={e => operation ? setSecondNum(Number(secondNum + "0")) : setFirstNum(Number(firstNum + "0"))} elementId={'largeButton'}></NumberButtons>
-          <NumberButtons title={'.'} onClick={e => operation ? setSecondNum(secondNum + ".") : setFirstNum(firstNum + ".")} elementId={'blackButton'}></NumberButtons>
+          <NumberButtons title={'0'} onClick={e => addNumber('0')} elementId={'largeButton'}></NumberButtons>
+          <NumberButtons title={'.'} onClick={addDot} elementId={'blackButton'}></NumberButtons>
           <NumberButtons title={'='} onClick={e => submit()} elementId={'orangeButton'}></NumberButtons>
         </span>
       </div>
