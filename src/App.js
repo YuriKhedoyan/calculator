@@ -1,6 +1,5 @@
 import Calculator from "./components/pages/Calculator";
-const App = () => <div className="app">
-    <Calculator />
-  </div>
+
+const App = () => <> <Calculator /> </>
 
 export default App;
